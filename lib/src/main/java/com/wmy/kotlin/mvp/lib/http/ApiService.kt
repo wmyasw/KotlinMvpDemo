@@ -6,7 +6,7 @@ import okhttp3.ResponseBody
 import retrofit2.http.*
 
 /**
- *
+ * 定义基础请求类型
  *@author：wmyasw
  */
 interface ApiService {

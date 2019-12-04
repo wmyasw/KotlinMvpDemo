@@ -1,12 +1,9 @@
 package com.wmy.kotlin.demo.utils
 
-/**
- *
- *@author：wmyasw
- */
 
 /**
  * 字符串相关工具类
+ * @author：wmyasw
  */
 class StringUtils private constructor() {
 

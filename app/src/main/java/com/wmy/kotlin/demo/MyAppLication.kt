@@ -6,17 +6,15 @@ import com.scwang.smartrefresh.layout.api.*
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.wmy.kotlin.mvp.lib.base.BaseApplication
-import com.wmy.kotlin.mvvm.theme.SkinManager
 
 /**
  *
  *@author：wmyasw
  */
-class MyAppLication  : BaseApplication() {
+class MyAppLication : BaseApplication() {
     init {
 //    设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(object : DefaultRefreshHeaderCreator {
-
 
             override fun createRefreshHeader(context: Context, layout: RefreshLayout): RefreshHeader {
                 layout.setPrimaryColorsId(R.color.transparent, android.R.color.white)//全局设置主题颜色
@@ -35,6 +33,5 @@ class MyAppLication  : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        SkinManager.instance.init(this)
     }
 }

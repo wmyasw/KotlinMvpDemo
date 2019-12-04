@@ -3,7 +3,7 @@ package com.wmy.kotlin.demo.module
 import java.io.Serializable
 
 /**
- *
+ * 定义一个天气的bean
  *@author：wmyasw
  */
 class WeatherBean :Serializable{

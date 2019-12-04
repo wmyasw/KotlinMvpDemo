@@ -6,7 +6,7 @@ import com.wmy.kotlin.mvp.lib.BuildConfig
 
 
 /**
- *
+ * 日志工具类
  *@author：wmyasw
  */
 

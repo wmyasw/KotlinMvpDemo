@@ -1,9 +1,5 @@
 package com.wmy.kotlin.demo.http
 
-/**
- *
- *@author：wmyasw
- */
 
 import java.io.Serializable
 

@@ -1,6 +1,8 @@
 package com.wmy.kotlin.demo.http
 
-
+/**
+ * 回调接口定义
+ */
 interface ResponseCallBack<T> {
     /**
      * 加载数据成功

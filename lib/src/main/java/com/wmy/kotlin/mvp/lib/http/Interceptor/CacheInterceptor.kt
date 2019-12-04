@@ -1,9 +1,6 @@
 package com.wmy.kotlin.demo.http.Interceptor
 
-/**
- *
- *@author：wmyasw
- */
+
 import android.content.Context
 import android.util.Log
 import com.wmy.kotlin.demo.utils.NetworkUtils
@@ -12,7 +9,8 @@ import okhttp3.Response
 import okhttp3.CacheControl
 
 /**
- * @author Created by qlang on 2017/7/14.
+ * 设置单独的缓存读取拦截器
+ * @author：wmyasw
  */
 class CacheInterceptor(context: Context) : Interceptor {
     val context = context

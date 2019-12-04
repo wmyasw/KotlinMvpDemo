@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
 /**
- *
+ * 初始化工具类
  *@author：wmyasw
  */
 class Utils private constructor() {

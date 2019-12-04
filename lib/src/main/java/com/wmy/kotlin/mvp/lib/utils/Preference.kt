@@ -8,8 +8,8 @@ import java.io.*
 import kotlin.reflect.KProperty
 
 /**
- * Created by xuhao on 2017/12/11.
- * desc:kotlin委托属性+SharedPreference实例
+ * kotlin委托属性+SharedPreference实例
+ *
  */
 class Preference<T>(val name:String, private val default:T) {
 

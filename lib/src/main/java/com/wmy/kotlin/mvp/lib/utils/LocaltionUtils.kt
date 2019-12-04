@@ -13,6 +13,9 @@ import android.location.*
 import android.util.Log
 import com.wmy.kotlin.demo.utils.LogUtils
 
+/**
+ * 获取位置信息工具类
+ */
 class LocationUtils private constructor(private val mContext: Context) {
 
     private var locationManager: LocationManager? = null

@@ -13,18 +13,12 @@ import com.wmy.kotlin.mvp.lib.mvp.contract.BaseContract
  */
 abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivity() {
     lateinit var mPresenter: P
-//    protected var toolbar: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        ThemeUtils.setBaseTheme(this)
         super.onCreate(savedInstanceState)
         if (layoutId() > 0) {
             setContentView(layoutId())
         }
-        //        ButterKnife.bind(this);
-//        if (toolbar != null) {
-//            setSupportActionBar(toolbar)
-//        }
         mPresenter = initPresenter()
         init()
         initData()

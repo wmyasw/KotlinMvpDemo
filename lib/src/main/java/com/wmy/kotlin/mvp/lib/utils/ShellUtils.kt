@@ -3,6 +3,9 @@ import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.InputStreamReader
 
+/**
+ * 命令集的工具处理类
+ */
 class ShellUtils private constructor() {
 
     init {

@@ -95,7 +95,6 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
         api.registerApp(appId)
 
         //建议动态监听微信启动广播进行注册到微信
-        //建议动态监听微信启动广播进行注册到微信
         registerReceiver(object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) { // 将该app注册到微信
                 api.registerApp(appId)

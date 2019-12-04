@@ -1,9 +1,5 @@
 package com.wmy.kotlin.demo.utils
 
-/**
- *
- *@author：wmyasw
- */
 
 import android.content.Context
 import android.content.Intent
@@ -25,6 +21,7 @@ import java.util.concurrent.Future
 
 /**
  * 网络相关工具类
+ * @author：wmyasw
  */
 class NetworkUtils private constructor() {
 
