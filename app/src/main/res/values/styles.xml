@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="TranslucentTheme" parent="AppTheme">
+        <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
+    </style>
+
+
+
+    <style name="lightTheme">
+        <item name="android:textColor">#eeeccc</item>
+        <item name="android:background">#ffffff</item>
+    </style>
+
+    <style name="blackTheme">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">#000000</item>
+    </style>
+
+</resources>
