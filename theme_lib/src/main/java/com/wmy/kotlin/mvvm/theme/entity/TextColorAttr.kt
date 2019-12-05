@@ -23,8 +23,10 @@ class TextColorAttr : SkinItem(){
         }
         if (view is androidx.appcompat.widget.Toolbar) {
             if (SkinItem.RES_TYPE_NAME_COLOR == typeName) {
-                Log.e("TextColorAttr", "Toolbar:")
-                view.setTitleTextColor(resId)
+                Log.e("TextColorAttr", "Toolbar:$resId")
+                var r=SkinManager.instance.convertToColorStateList(resId)
+                Log.e("TextColorAttr", "Toolbar:$r")
+                view.setTitleTextColor(r!!)
             }
         }
         if (view is androidx.appcompat.widget.AppCompatTextView) {

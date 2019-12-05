@@ -31,6 +31,7 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
         var rxPermission = RxPermissions(this)
         rxPermission.requestEach(Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_CALENDAR,
                 Manifest.permission.READ_CALL_LOG,
                 Manifest.permission.READ_CONTACTS,
@@ -61,7 +62,7 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
 //        setTitle("首页")
         toolbar.title="首页"
         setSupportActionBar(toolbar)
-
+        setData(null)
     }
 
 
@@ -70,7 +71,7 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
         mPresenter.requestHomeData(location)
     }
 
-    fun setData(data: WeatherBean) {
+    fun setData(data: WeatherBean?) {
 //        panel_city_text.setText(data.getCity()?.name)
 //        panel_temp_now_text.setText(data.getForecast()!!.get(0).tempDay)
 //        panel_weather_desc_text.setText(data.getForecast()!!.get(0).conditionDay)

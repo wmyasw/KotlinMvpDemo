@@ -10,7 +10,9 @@ import android.content.res.Resources
 import android.content.res.Resources.NotFoundException
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.wmy.kotlin.mvvm.theme.listener.ILoaderListener
 import com.wmy.kotlin.mvvm.theme.listener.ISkinLoader
@@ -46,8 +48,6 @@ class SkinManager private constructor() : ISkinLoader {
         private var isDefaultSkin = false
 
 
-
-
         //实现懒加载的线程安全
         val instance: SkinManager by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             SkinManager()
@@ -55,33 +55,52 @@ class SkinManager private constructor() : ISkinLoader {
 
 
     }
+
     fun init(app: Application) {
 
         mapp = app
         context = app.applicationContext
         lifecycleCallback = SkinActivityLifecycleCallBack()
         mapp!!.registerActivityLifecycleCallbacks(lifecycleCallback)
-        mResources= context!!.resources
+        mResources = context!!.resources
         loadSkin()
     }
+
     /**
      * 根据传进来的id 去匹配资源对象，如果有类型和名字一样的就返回
      * @param resId
      * @return
      */
     fun getColor(resId: Int): Int {
-        Log.d("ee","resId = $resId")
-        Log.d("ee","mResources = $mResources")
-        if (mResources == null) return resId
-        //替换主题资源属性名
-        val resourceEntryName = context!!.resources.getResourceEntryName(resId)
-        //替换主题资源属性类型 如 color 、mipmap drawable
-        val resourceTypeName = context!!.resources.getResourceTypeName(resId)
-        //identifier 是资源和名字类型匹配的id
-        val identifier = mResources!!.getIdentifier(resourceEntryName, resourceTypeName, skinPackageName)
-        Log.d("ee","identifier = $identifier")
 
-        return if (identifier == 0) resId else mResources!!.getColor(identifier)//ContextCompat.getColor(context!!, identifier) mResources
+        val originColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            context!!.resources.getColor(resId, context!!.resources.newTheme())
+        } else {
+            context!!.resources.getColor(resId)
+        }
+
+        if (mResources == null || isDefaultSkin) {
+            return originColor
+        }
+
+        val resName = context!!.resources.getResourceEntryName(resId)
+
+        val trueResId = mResources!!.getIdentifier(resName, "color", skinPackageName)
+        var trueColor = 0
+
+        trueColor = try {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mResources!!.getColor(trueResId, mResources!!.newTheme())
+            } else
+                mResources!!.getColor(trueResId)
+
+        } catch (e: NotFoundException) {
+            e.printStackTrace()
+            originColor
+        }
+
+        return trueColor
 
     }
 
@@ -124,12 +143,17 @@ class SkinManager private constructor() : ISkinLoader {
      * @param resId
      * @return
      */
+    @SuppressLint("NewApi")
     fun convertToColorStateList(resId: Int): ColorStateList? {
         Log.e("attr1", "convertToColorStateList")
+
         var isExtendSkin = true
+
+
         if (mResources == null || isDefaultSkin) {
             isExtendSkin = false
         }
+
         val resName = context!!.resources.getResourceEntryName(resId)
         Log.e("attr1", "resName = $resName")
         if (isExtendSkin) {
@@ -139,14 +163,14 @@ class SkinManager private constructor() : ISkinLoader {
             var trueColorList: ColorStateList? = null
             if (trueResId == 0) { // 如果皮肤包没有复写该资源，但是需要判断是否是ColorStateList
                 try {
-                    return ContextCompat.getColorStateList(context!!, resId)
+                    return context!!.resources.getColorStateList(resId, context!!.resources.newTheme())
                 } catch (e: NotFoundException) {
                     e.printStackTrace()
                     Log.e("", "resName = " + resName + " NotFoundException : " + e.message)
                 }
             } else {
                 try {
-                    trueColorList = ContextCompat.getColorStateList(context!!, trueResId)
+                    trueColorList = mResources!!.getColorStateList(trueResId, mResources!!.newTheme())
                     Log.e("attr1", "trueColorList = $trueColorList")
                     return trueColorList
                 } catch (e: NotFoundException) {
@@ -156,14 +180,14 @@ class SkinManager private constructor() : ISkinLoader {
             }
         } else {
             try {
-                return ContextCompat.getColorStateList(context!!, resId)
+                return context!!.resources.getColorStateList(resId, context!!.resources.newTheme())
             } catch (e: NotFoundException) {
                 e.printStackTrace()
                 Log.w("attr1", "resName = " + resName + " NotFoundException :" + e.message)
             }
         }
         val states = Array(1) { IntArray(1) }
-        return ColorStateList(states, intArrayOf(ContextCompat.getColor(context!!, resId)))
+        return ColorStateList(states, intArrayOf(context!!.resources.getColor(resId, null)))
     }
 
 //    /**
@@ -217,6 +241,7 @@ class SkinManager private constructor() : ISkinLoader {
         }
         loadSkin(skin, callback)
     }
+
     /**
      * 设置指定皮肤
      * @param path 地址
@@ -271,6 +296,7 @@ class SkinManager private constructor() : ISkinLoader {
 
         }.execute(path)
     }
+
     override fun attach(observer: ISkinUpdate?) {
 //        if (skinObservers == null) {
 //            skinObservers = ArrayList<ISkinUpdate>()
@@ -290,12 +316,37 @@ class SkinManager private constructor() : ISkinLoader {
     override fun notifySkinUpdate() {
 
         SkinFactory.instance?.apply()
+
+        animation()
 //        if (skinObservers == null) return
 //        for (observer in skinObservers) {
 //            observer.onThemeUpdate()
 //        }
     }
-     fun claan() {
+
+    fun animation() {
+//        val colorAnimator =  ObjectAnimator.ofInt(view,"backgroundColor",0x0000000,rid)
+//        //设置动画时间
+//        colorAnimator.setDuration(3000)
+//        //设置插值器
+//        colorAnimator.setEvaluator(ArgbEvaluator())
+//        //设置播放次数为无限
+//        colorAnimator.repeatCount = ValueAnimator.INFINITE
+//        //播放完成之后反转
+//        colorAnimator.repeatMode = ValueAnimator.REVERSE
+//        colorAnimator.start()
+//        val valueAnimator = ValueAnimator.ofInt(0, 100)  //数值从0到300
+//        valueAnimator.duration = 500   //时间500毫秒
+//        valueAnimator.interpolator = BounceInterpolator()  //插值器  有弹球效果
+//        valueAnimator.addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
+//            override fun onAnimationUpdate(animation: ValueAnimator) {
+//                Log.e("AA", "数值变化：${animation.animatedValue}")
+//            }
+//        })
+//        valueAnimator.start()  //启动
+    }
+
+    fun claan() {
 //        context.resources
 //        if (skinObservers == null) return
 //        for (observer in skinObservers) {
