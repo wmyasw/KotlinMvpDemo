@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation project(path: ':lib')
+    implementation project(path: ':theme_lib')
     implementation 'com.google.android.material:material:1.0.0'
 }
 repositories {

@@ -6,6 +6,7 @@ import com.scwang.smartrefresh.layout.api.*
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.wmy.kotlin.mvp.lib.base.BaseApplication
+import com.wmy.kotlin.mvvm.theme.SkinManager
 
 /**
  *
@@ -33,5 +34,6 @@ class MyAppLication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        SkinManager.instance.init(this)
     }
 }

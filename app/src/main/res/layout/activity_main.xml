@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/android/skin"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    skin:enable="true"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true">
@@ -12,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
+        skin:enable="true"
+        app:titleTextColor="@color/colorAccent"
         android:elevation="1dp"
         tools:ignore="MissingConstraints">
     </androidx.appcompat.widget.Toolbar>
@@ -260,23 +264,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/layout3" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="match_parent"-->
-        <!--        tools:context=".ui.WeatherActivity">-->
-        <!--     -->
-        <!--&lt;!&ndash;        <androidx.recyclerview.widget.RecyclerView&ndash;&gt;-->
-        <!--&lt;!&ndash;            android:id="@+id/rv_weather"&ndash;&gt;-->
-        <!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
-        <!--&lt;!&ndash;            tools:ignore="MissingConstraints"&ndash;&gt;-->
-        <!--&lt;!&ndash;            tools:layout_editor_absoluteX="1dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;            tools:layout_editor_absoluteY="1dp" />&ndash;&gt;-->
-        <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-        <!--    </androidx.core.widget.NestedScrollView>-->
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

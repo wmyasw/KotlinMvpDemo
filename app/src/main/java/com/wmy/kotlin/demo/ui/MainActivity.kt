@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.location.Location
+import android.os.Environment
 import android.view.View
 import android.view.View.OnClickListener
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -18,7 +19,9 @@ import com.wmy.kotlin.demo.mvp.HomeContract
 import com.wmy.kotlin.demo.mvp.MainPresenter
 import com.wmy.kotlin.demo.utils.NetworkUtils
 import com.wmy.kotlin.mvp.lib.base.BaseActivity
+import com.wmy.kotlin.mvvm.theme.SkinManager
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 
 class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, HomeContract.View>(), HomeContract.View {
@@ -68,20 +71,35 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
     }
 
     fun setData(data: WeatherBean) {
-        panel_city_text.setText(data.getCity()?.name)
-        panel_temp_now_text.setText(data.getForecast()!!.get(0).tempDay)
-        panel_weather_desc_text.setText(data.getForecast()!!.get(0).conditionDay)
-        panel_air_condition_text.setText("空气 " + data.getForecast()!!.get(0).conditionDay)
+//        panel_city_text.setText(data.getCity()?.name)
+//        panel_temp_now_text.setText(data.getForecast()!!.get(0).tempDay)
+//        panel_weather_desc_text.setText(data.getForecast()!!.get(0).conditionDay)
+//        panel_air_condition_text.setText("空气 " + data.getForecast()!!.get(0).conditionDay)
+
+//        layout1.setOnClickListener(object : OnClickListener {
+//            override fun onClick(p0: View?) {
+//                get()
+//            }
+//        })
+        srl_refresh.setEnableLoadMore(false)
         layout1.setOnClickListener(object : OnClickListener {
             override fun onClick(p0: View?) {
-                get()
+//                get()
+
+                val sdpath: String = Environment.getExternalStorageDirectory().getAbsolutePath()
+                SkinManager.instance.loadSkin(sdpath+ File.separator+"theme_w-debug.apk")
             }
         })
-        srl_refresh.setEnableLoadMore(false)
+        layout2.setOnClickListener(object:OnClickListener{
+            override fun onClick(p0: View?) {
+                SkinManager.instance.reDefaultTheme()
+            }
+
+        })
     }
 
     override fun start() {
-        mPresenter.start()
+//        mPresenter.start()
     }
 
 
