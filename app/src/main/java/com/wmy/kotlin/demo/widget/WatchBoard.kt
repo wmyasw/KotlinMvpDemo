@@ -65,7 +65,7 @@ class WatchBoard @JvmOverloads constructor(
         heightPixels = context.getResources().getDisplayMetrics().heightPixels;
 //        // 默认和屏幕的宽高最小值相等
         mWidth = Math.min(widthPixels, heightPixels);
-        mHeight=mWidth
+        mHeight = mWidth
         mPaint = Paint()
         mPaint!!.isAntiAlias = true
         mPaint!!.isDither = true
@@ -95,9 +95,9 @@ class WatchBoard @JvmOverloads constructor(
         super.onSizeChanged(w, h, oldw, oldh)
         mRadius = (Math.min(w, h) - mPadding) / 2
         //判断当前view 设置宽度大于屏幕宽度的话 使用屏幕宽度
-        if(w>widthPixels)
+        if (w > widthPixels)
             mRadius = (Math.min(widthPixels, h) - mPadding) / 2
-        if(h>heightPixels)
+        if (h > heightPixels)
             mRadius = (Math.min(w, heightPixels) - mPadding) / 2
         mPointEndLength = mRadius / 6; // 设置成半径的六分之一
         mPointEndLength = mRadius / 6; // 设置成半径的六分之一
@@ -199,12 +199,12 @@ class WatchBoard @JvmOverloads constructor(
                 val textHeight: Int = textBound.bottom - textBound.top
                 canvas.save()
                 //这个时候我们使用Canvas的Save方法保存了刚才的状态，这个时候我们不移动X轴，只移动Y轴，将坐标向上移动-mRidus + textHeight距离，因为对于手机来说，向上为Y的负轴，所以为-mRidus + textHeight，下面我一会用图来说明
-                canvas.translate(0f, -mRadius+textHeight+lineWidth+mPadding/2 )
+                canvas.translate(0f, -mRadius + textHeight + lineWidth + mPadding / 2)
                 //由于我们没旋转一次，会使用Canvas的rotate方法顺时针旋转6度，所以文字也会跟着旋转，但是我们要让文字不旋转的话，就需要逆时针旋转相应的度数
                 canvas.rotate(-(6 * i).toFloat())
                 canvas.drawText(text,
-                        (mWidth-mPadding)/2.toFloat(),
-                        (mWidth+mPadding)/2.toFloat(), mPaint!!)
+                        (mWidth - mPadding) / 2.toFloat(),
+                        (mWidth + mPadding) / 2.toFloat(), mPaint!!)
                 canvas.restore()
             }
             //旋转6度
@@ -232,7 +232,7 @@ class WatchBoard @JvmOverloads constructor(
                 canvas.save()
                 mPaint!!.setTextSize(mTextSize);
                 val text = (if (i / 5 === 0) 12 else i / 5).toString() + ""
-                var textBound =  Rect()
+                var textBound = Rect()
                 mPaint!!.getTextBounds(text, 0, text.length, textBound);
                 mPaint!!.setColor(Color.BLACK);
             } else {
@@ -255,12 +255,12 @@ class WatchBoard @JvmOverloads constructor(
         var hour = calendar.get(Calendar.HOUR);// 时
         var minute = calendar.get(Calendar.MINUTE);// 分
         var second = calendar.get(Calendar.SECOND);// 秒
-        // 转过的角度 //设置时针每十分钟转动一下角度
-        var angleHour: Int = (hour ) * (360 / 12)+ 30/5
+        // 转过的角度 //设置时针每5分钟转动一下角度
+        var angleHour: Float = (hour * 360 + minute / 5 * 30) / 12.toFloat()
         var angleMinute = (minute + (second / 60)) * 360 / 60
         var angleSecond: Float = (second * 360 / 60).toFloat()
 
-        LogUtils.e("时针旋转角度：$angleHour"+"分针旋转角度：$angleMinute")
+        LogUtils.e("时针旋转角度：$angleHour" + "分针旋转角度：$angleMinute")
         // 绘制时针
         canvas.save()
         canvas.rotate(angleHour.toFloat(), (mWidth!! / 2).toFloat(), (mWidth!! / 2).toFloat()) // 旋转到时针的角度
@@ -295,10 +295,10 @@ class WatchBoard @JvmOverloads constructor(
     fun measureSize(measureSpec: Int): Int {
         var size = MeasureSpec.getSize(measureSpec);
         mWidth = Math.min(measuredWidth, size)
-        if(mWidth>widthPixels)
-            mWidth=widthPixels
-        if(mWidth>heightPixels)
-            mWidth=heightPixels
+        if (mWidth > widthPixels)
+            mWidth = widthPixels
+        if (mWidth > heightPixels)
+            mWidth = heightPixels
         mHeight = mWidth
         return mWidth
     }
