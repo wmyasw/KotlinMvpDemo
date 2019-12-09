@@ -38,14 +38,8 @@ class WatchBoard @JvmOverloads constructor(
     var mDrawFilter: PaintFlagsDrawFilter? = null // 为画布设置抗锯齿
     private var mWidth = 0
     private var mHeight = 0
-    private var onPreDrawListener: ViewTreeObserver.OnPreDrawListener? = null
     private var widthPixels: Int
     private var heightPixels: Int
-    var mScaleLengthLong = mRadius * 0.1f
-    var mScaleLengthShort = mRadius * 0.05f
-    var mTickLengthHour = mRadius * 0.3f
-    var mTickLengthMinute = mRadius * 0.45f
-    var mTickLengthSecond = mRadius * 0.6f
 
     //绘制各部件时用的Paint
     private var mPaintScaleLong: Paint? = null
@@ -69,26 +63,10 @@ class WatchBoard @JvmOverloads constructor(
         mPaint = Paint()
         mPaint!!.isAntiAlias = true
         mPaint!!.isDither = true
-//        onPreDrawListener = ViewTreeObserver.//获取view宽高并计算各个部件的长度
-//                OnPreDrawListener {
-//
-//
-//                    mWidth = measuredWidth
-//                    mHeight = measuredHeight
-//                    mRadius = Math.min(width!!, height!!) / 2 * 0.95f
-////                     mScaleLengthLong = mRadius * 0.1f
-////                    mScaleLengthShort = mRadius * 0.05f
-////                    mTickLengthHour = mRadius * 0.3f
-////                    mTickLengthMinute = mRadius * 0.45f
-////                    mTickLengthSecond = mRadius * 0.6f
-//                    true
-//                }
-//        viewTreeObserver.addOnPreDrawListener(onPreDrawListener)
 
         if (attrs != null) {
             obtainStyledAttrs(attrs)
         }
-//        initializePaints()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -99,7 +77,6 @@ class WatchBoard @JvmOverloads constructor(
             mRadius = (Math.min(widthPixels, h) - mPadding) / 2
         if (h > heightPixels)
             mRadius = (Math.min(w, heightPixels) - mPadding) / 2
-        mPointEndLength = mRadius / 6; // 设置成半径的六分之一
         mPointEndLength = mRadius / 6; // 设置成半径的六分之一
     }
 
@@ -122,35 +99,6 @@ class WatchBoard @JvmOverloads constructor(
 
         // 一定要回收
         typedArray.recycle()
-    }
-
-    private fun initializePaints() {
-        mPaintScaleLong = Paint()
-        mPaintScaleLong!!.setAntiAlias(true)
-        mPaintScaleLong!!.setColor(mColorLong)
-        mPaintScaleLong!!.setStrokeWidth(5f)
-        mPaintScaleShort = Paint()
-        mPaintScaleShort!!.setAntiAlias(true)
-        mPaintScaleShort!!.setStrokeWidth(3f)
-        mPaintScaleShort!!.setColor(mColorShort)
-        mPaintOutline = Paint()
-        mPaintOutline!!.setStyle(Paint.Style.STROKE)
-        mPaintOutline!!.setAntiAlias(true)
-        mPaintOutline!!.setStrokeWidth(5f)
-        mPaintNum = Paint()
-        mPaintNum!!.setTextSize(30f)
-        mPaintTickHour = Paint()
-        mPaintTickHour!!.setColor(mHourPointColor)
-        mPaintTickHour!!.setAntiAlias(true)
-        mPaintTickHour!!.setStrokeWidth(6f)
-        mPaintTickMinute = Paint()
-        mPaintTickMinute!!.setColor(mMinutePointColor)
-        mPaintTickMinute!!.setAntiAlias(true)
-        mPaintTickMinute!!.setStrokeWidth(4f)
-        mPaintTickSecond = Paint()
-        mPaintTickSecond!!.setColor(mSecondPointColor)
-        mPaintTickSecond!!.setAntiAlias(true)
-        mPaintTickSecond!!.setStrokeWidth(2f)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
