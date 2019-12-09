@@ -151,7 +151,7 @@ class WatchBoard @JvmOverloads constructor(
                 //由于我们没旋转一次，会使用Canvas的rotate方法顺时针旋转6度，所以文字也会跟着旋转，但是我们要让文字不旋转的话，就需要逆时针旋转相应的度数
                 canvas.rotate(-(6 * i).toFloat())
                 canvas.drawText(text,
-                        (mWidth - mPadding) / 2.toFloat(),
+                        (mWidth - mPadding) / 2.toFloat()-Utils.dp2px(2),
                         (mWidth + mPadding) / 2.toFloat(), mPaint!!)
                 canvas.restore()
             }
@@ -170,19 +170,10 @@ class WatchBoard @JvmOverloads constructor(
 
         for (i in 0..60) {
             if (i % 5 == 0) {
-                mPaint!!.setStrokeWidth(Utils.dp2px(2))
-                mPaint!!.setColor(mColorLong);
                 lineWidth = 40;
                 mPaint!!.setStrokeWidth(Utils.dp2px(2))
                 mPaint!!.setColor(mColorLong);
 
-                // 这里是字体的绘制
-                canvas.save()
-                mPaint!!.setTextSize(mTextSize);
-                val text = (if (i / 5 === 0) 12 else i / 5).toString() + ""
-                var textBound = Rect()
-                mPaint!!.getTextBounds(text, 0, text.length, textBound);
-                mPaint!!.setColor(Color.BLACK);
             } else {
                 lineWidth = 30;
                 mPaint!!.setColor(mColorShort);
