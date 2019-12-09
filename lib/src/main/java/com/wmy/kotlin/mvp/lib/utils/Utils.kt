@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.res.Resources
+import android.util.TypedValue
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+
 
 /**
  * 初始化工具类
@@ -44,6 +47,14 @@ class Utils private constructor() {
             throw NullPointerException("u should init first")
         }
 
+        fun dp2px(dp: Int): Float {
+            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+                    Resources.getSystem().displayMetrics)
+        }
+
+        fun sp2px( spVal:Int): Float {
+            return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal.toFloat(),  Resources.getSystem().displayMetrics);
+        }
         /**
          * View获取Activity的工具
          *

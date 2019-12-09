@@ -12,7 +12,7 @@ import com.wmy.kotlin.mvp.lib.mvp.contract.BaseContract
  *@author：wmyasw
  */
 abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivity() {
-    lateinit var mPresenter: P
+     var mPresenter: P? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
 
 
     //初始化逻辑对象
-    abstract fun initPresenter(): P
+    abstract fun initPresenter(): P?
 
     /**
      * 初始化view

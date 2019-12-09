@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.wmy.kotlin.mvvm.theme.listener.ILoaderListener
 import com.wmy.kotlin.mvvm.theme.listener.ISkinLoader
@@ -99,6 +98,7 @@ class SkinManager private constructor() : ISkinLoader {
             e.printStackTrace()
             originColor
         }
+
 
         return trueColor
 

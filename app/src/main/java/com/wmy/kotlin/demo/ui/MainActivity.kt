@@ -50,7 +50,7 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
 //                        Log.e(FragmentActivity.TAG, permission.name + "权限被禁止！")
                     }
                 })
-        mPresenter.attachView(this as HomeContract.View)
+        mPresenter!!.attachView(this as HomeContract.View)
 
 
     }
@@ -68,7 +68,7 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
 
     fun getWeatherData() {
         var location = LocationUtils.getInstance(this)!!.showLocation() as Location
-        mPresenter.requestHomeData(location)
+        mPresenter?.requestHomeData(location)
     }
 
     fun setData(data: WeatherBean?) {
