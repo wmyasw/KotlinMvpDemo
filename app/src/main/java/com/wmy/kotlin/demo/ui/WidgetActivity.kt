@@ -16,21 +16,19 @@ class WidgetActivity : BaseActivity<Presenter<Any>, Any>() {
     override fun initPresenter(): Presenter<Any>? {
         return null
     }
-
+    var sensorManager: SensorManager? =null
+    var listener: SensorEventListener? =null
     override fun init() {
 
 
 // 取传感器
-        val sensorManager: SensorManager =
+         sensorManager =
                 getSystemService(SENSOR_SERVICE) as SensorManager;
         // 获取陀螺仪
         val  gyroscopeSensor =
-                sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION)
+                sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
 
-
-// Create a listener
-
-        sensorManager.registerListener(object:SensorEventListener{
+        listener=object :SensorEventListener{
             override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
 
             }
@@ -41,10 +39,13 @@ class WidgetActivity : BaseActivity<Presenter<Any>, Any>() {
                 var value0=values[0];
                 var value1=values[1];
                 LogUtils.e("打印数据：$value0  $value1")
-                compassView.setValues(values)
+//                compassView.setValues(values)
             }
 
-        },
+        }
+// Create a listener
+
+        sensorManager!!.registerListener(listener,
                 gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
@@ -58,5 +59,9 @@ class WidgetActivity : BaseActivity<Presenter<Any>, Any>() {
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        sensorManager?.unregisterListener(listener)
 
+    }
 }

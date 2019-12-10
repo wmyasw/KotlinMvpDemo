@@ -97,13 +97,21 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
             }
 
         })
+        layout2.setOnClickListener(object:OnClickListener{
+            override fun onClick(p0: View?) {
+                startActivity()
+            }
+
+        })
     }
 
     override fun start() {
 //        mPresenter.start()
     }
 
-
+fun startActivity(){
+    startActivity(Intent(MainActivity@this, WidgetActivity::class.java))
+}
     /**
      * 测试微信调取小程序
      */

@@ -1,16 +1,19 @@
 package com.wmy.kotlin.demo.utils
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import java.util.*
 
 
 /**
@@ -34,7 +37,31 @@ class Utils private constructor() {
          */
         fun init(context: Context) {
             Utils.context = context.applicationContext
-            
+                    var app= Utils.context as Application
+            app.registerActivityLifecycleCallbacks(object :Application.ActivityLifecycleCallbacks{
+                override fun onActivityPaused(p0: Activity) {
+                }
+
+                override fun onActivityStarted(p0: Activity) {
+                }
+
+                override fun onActivityDestroyed(p0: Activity) {
+                }
+
+                override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {
+                }
+
+                override fun onActivityStopped(p0: Activity) {
+                }
+
+                override fun onActivityCreated(p0: Activity, p1: Bundle?) {
+                    LogUtils.setTag(p0.localClassName)
+                }
+
+                override fun onActivityResumed(p0: Activity) {
+                }
+
+            })
         }
 
         /**

@@ -10,11 +10,15 @@ import com.wmy.kotlin.mvp.lib.BuildConfig
  *@author：wmyasw
  */
 
-object LogUtils {
+object LogUtils  {
 
     /**日志输出级别 0为不输出 */
     private val logMode = Log.ERROR
-    private val TAG = "LogUtils"
+    private var TAG = "LogUtils"
+
+    fun setTag(s:String){
+        TAG=s;
+    }
 
     /**
      * 输出Error信息
