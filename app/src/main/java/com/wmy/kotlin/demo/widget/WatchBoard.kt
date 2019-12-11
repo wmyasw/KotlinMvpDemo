@@ -13,7 +13,7 @@ import java.util.*
 
 
 /**
- *
+ * 一个钟表
  *@author：wmyasw
  */
 class WatchBoard @JvmOverloads constructor(

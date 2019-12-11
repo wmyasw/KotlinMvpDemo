@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">KotlinDemo</string>
+    <string name="title_activity_shake">ShakeActivity</string>
+    <string name="aa">123</string>
+    <string name="cc">456621</string>
+    <string name="dd">qwewq</string>
+    <string name="bb">qweqwe</string>
+    <string name="ee">vvvvvvvv</string>
 </resources>

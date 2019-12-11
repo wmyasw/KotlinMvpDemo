@@ -7,6 +7,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.location.Location
 import android.os.Environment
+import android.os.Handler
+import android.os.Message
 import android.view.View
 import android.view.View.OnClickListener
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -22,6 +24,9 @@ import com.wmy.kotlin.mvp.lib.base.BaseActivity
 import com.wmy.kotlin.mvvm.theme.SkinManager
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
+import java.sql.Time
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, HomeContract.View>(), HomeContract.View {
@@ -52,15 +57,18 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
                 })
         mPresenter!!.attachView(this as HomeContract.View)
 
-
+//        for (i in 0..100) {
+//            list.add("wang${i}")
+//        }
     }
+
 
     override fun layoutId(): Int = R.layout.activity_main
 
 
     override fun initData() {
 //        setTitle("首页")
-        toolbar.title="首页"
+        toolbar.title = "首页"
         setSupportActionBar(toolbar)
         setData(null)
     }
@@ -72,15 +80,15 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
     }
 
     fun setData(data: WeatherBean?) {
-//        panel_city_text.setText(data.getCity()?.name)
-//        panel_temp_now_text.setText(data.getForecast()!!.get(0).tempDay)
-//        panel_weather_desc_text.setText(data.getForecast()!!.get(0).conditionDay)
-//        panel_air_condition_text.setText("空气 " + data.getForecast()!!.get(0).conditionDay)
-
-//        layout1.setOnClickListener(object : OnClickListener {
-//            override fun onClick(p0: View?) {
-//                get()
-//            }
+//
+//            }     panel_city_text.setText(data.getCity()?.name)
+////        panel_temp_now_text.setText(data.getForecast()!!.get(0).tempDay)
+////        panel_weather_desc_text.setText(data.getForecast()!!.get(0).conditionDay)
+////        panel_air_condition_text.setText("空气 " + data.getForecast()!!.get(0).conditionDay)
+//
+////        layout1.setOnClickListener(object : OnClickListener {
+////            override fun onClick(p0: View?) {
+////                get()
 //        })
         srl_refresh.setEnableLoadMore(false)
         layout1.setOnClickListener(object : OnClickListener {
@@ -88,18 +96,18 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
 //                get()
 
                 val sdpath: String = Environment.getExternalStorageDirectory().getAbsolutePath()
-                SkinManager.instance.loadSkin(sdpath+ File.separator+"theme_w-debug.apk")
+                SkinManager.instance.loadSkin(sdpath + File.separator + "theme_w-debug.apk")
             }
         })
-        layout2.setOnClickListener(object:OnClickListener{
+        layout2.setOnClickListener(object : OnClickListener {
             override fun onClick(p0: View?) {
                 SkinManager.instance.reDefaultTheme()
             }
 
         })
-        layout2.setOnClickListener(object:OnClickListener{
+        layout3.setOnClickListener(object : OnClickListener {
             override fun onClick(p0: View?) {
-                startActivity()
+                startActivity1(ShakeActivity::class.java)
             }
 
         })
@@ -109,9 +117,8 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
 //        mPresenter.start()
     }
 
-fun startActivity(){
-    startActivity(Intent(MainActivity@this, WidgetActivity::class.java))
-}
+
+
     /**
      * 测试微信调取小程序
      */

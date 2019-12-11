@@ -67,18 +67,18 @@ class BezierView @JvmOverloads constructor(
             canvas.drawPoint(control.x, control.y, mPaint);
 
             // 绘制辅助线
-            mPaint.setStrokeWidth(4F);
+            mPaint.setStrokeWidth(4F)
             canvas.drawLine(start.x, start.y, control.x, control.y, mPaint);
             canvas.drawLine(end.x, end.y, control.x, control.y, mPaint);
 
             // 绘制贝塞尔曲线
-            mPaint.setColor(Color.RED);
-            mPaint.setStrokeWidth(8F);
-            mPaint.setStyle(Paint.Style.FILL);
+            mPaint.setColor(Color.RED)
+            mPaint.setStrokeWidth(8F)
+            mPaint.setStyle(Paint.Style.FILL)
             var path = Path()
             path.fillType=Path.FillType.EVEN_ODD
-            path.moveTo(start.x, start.y);
-            path.quadTo(control.x, control.y, end.x, end.y);
+            path.moveTo(start.x, start.y)
+            path.quadTo(control.x, control.y, end.x, end.y)
 
             canvas.drawPath(path, mPaint);
             canvas.drawLine( start.x, start.y, end.x, end.y, mPaint);

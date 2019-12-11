@@ -1,6 +1,7 @@
 package com.wmy.kotlin.mvp.lib.base
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -13,7 +14,9 @@ import com.wmy.kotlin.mvp.lib.mvp.contract.BaseContract
  */
 abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivity() {
      var mPresenter: P? =null
-
+    fun <T>startActivity1(clazz:Class<T>) {
+        startActivity(Intent(this, clazz))
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (layoutId() > 0) {
