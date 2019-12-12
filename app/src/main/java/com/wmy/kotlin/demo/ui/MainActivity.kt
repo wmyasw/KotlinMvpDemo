@@ -94,9 +94,9 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
         layout1.setOnClickListener(object : OnClickListener {
             override fun onClick(p0: View?) {
 //                get()
-
-                val sdpath: String = Environment.getExternalStorageDirectory().getAbsolutePath()
-                SkinManager.instance.loadSkin(sdpath + File.separator + "theme_w-debug.apk")
+                startActivity1(WidgetActivity::class.java)
+//                val sdpath: String = Environment.getExternalStorageDirectory().getAbsolutePath()
+//                SkinManager.instance.loadSkin(sdpath + File.separator + "theme_w-debug.apk")
             }
         })
         layout2.setOnClickListener(object : OnClickListener {

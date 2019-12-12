@@ -36,9 +36,9 @@ class WidgetActivity : BaseActivity<Presenter<Any>, Any>() {
             override fun onSensorChanged(p0: SensorEvent?) {
                 var values= p0!!.values
 
-                var value0=values[0];
-                var value1=values[1];
-                LogUtils.e("打印数据：$value0  $value1")
+                var value0=values[0]
+                var value1=values[1]
+//                LogUtils.e("打印数据：$value0  $value1")
 //                compassView.setValues(values)
             }
 
@@ -46,7 +46,7 @@ class WidgetActivity : BaseActivity<Presenter<Any>, Any>() {
 // Create a listener
 
         sensorManager!!.registerListener(listener,
-                gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
+                gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL)
 
     }
 

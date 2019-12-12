@@ -82,20 +82,20 @@ class WatchBoard @JvmOverloads constructor(
 
 
     fun obtainStyledAttrs(attrs: AttributeSet) {
-        var typedArray: TypedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WatchBoard);
-        mPadding = typedArray.getDimension(R.styleable.WatchBoard_wb_padding, Utils.dp2px(10));
-        mTextSize = typedArray.getDimension(R.styleable.WatchBoard_wb_text_size, Utils.sp2px(16));
-        mHourPointWidth = typedArray.getDimension(R.styleable.WatchBoard_wb_hour_pointer_width, Utils.dp2px(5));
-        mMinutePointWidth = typedArray.getDimension(R.styleable.WatchBoard_wb_minute_pointer_width, Utils.dp2px(3));
-        mSecondPointWidth = typedArray.getDimension(R.styleable.WatchBoard_wb_second_pointer_width, Utils.dp2px(2));
-        mPointRadius = typedArray.getDimension(R.styleable.WatchBoard_wb_pointer_corner_radius, Utils.dp2px(10));
-        mPointEndLength = typedArray.getDimension(R.styleable.WatchBoard_wb_pointer_end_length, Utils.dp2px(10));
+        var typedArray: TypedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WatchBoard)
+        mPadding = typedArray.getDimension(R.styleable.WatchBoard_wb_padding, Utils.dp2px(10))
+        mTextSize = typedArray.getDimension(R.styleable.WatchBoard_wb_text_size, Utils.sp2px(16))
+        mHourPointWidth = typedArray.getDimension(R.styleable.WatchBoard_wb_hour_pointer_width, Utils.dp2px(5))
+        mMinutePointWidth = typedArray.getDimension(R.styleable.WatchBoard_wb_minute_pointer_width, Utils.dp2px(3))
+        mSecondPointWidth = typedArray.getDimension(R.styleable.WatchBoard_wb_second_pointer_width, Utils.dp2px(2))
+        mPointRadius = typedArray.getDimension(R.styleable.WatchBoard_wb_pointer_corner_radius, Utils.dp2px(10))
+        mPointEndLength = typedArray.getDimension(R.styleable.WatchBoard_wb_pointer_end_length, Utils.dp2px(10))
 
-        mHourPointColor = typedArray.getColor(R.styleable.WatchBoard_wb_hour_pointer_color, Color.BLACK);
-        mMinutePointColor = typedArray.getColor(R.styleable.WatchBoard_wb_minute_pointer_color, Color.BLACK);
-        mSecondPointColor = typedArray.getColor(R.styleable.WatchBoard_wb_second_pointer_color, Color.RED);
-        mColorLong = typedArray.getColor(R.styleable.WatchBoard_wb_scale_long_color, Color.argb(225, 0, 0, 0));
-        mColorShort = typedArray.getColor(R.styleable.WatchBoard_wb_scale_short_color, Color.argb(125, 0, 0, 0));
+        mHourPointColor = typedArray.getColor(R.styleable.WatchBoard_wb_hour_pointer_color, Color.BLACK)
+        mMinutePointColor = typedArray.getColor(R.styleable.WatchBoard_wb_minute_pointer_color, Color.BLACK)
+        mSecondPointColor = typedArray.getColor(R.styleable.WatchBoard_wb_second_pointer_color, Color.RED)
+        mColorLong = typedArray.getColor(R.styleable.WatchBoard_wb_scale_long_color, Color.argb(225, 0, 0, 0))
+        mColorShort = typedArray.getColor(R.styleable.WatchBoard_wb_scale_short_color, Color.argb(125, 0, 0, 0))
 
         // 一定要回收
         typedArray.recycle()
@@ -133,7 +133,7 @@ class WatchBoard @JvmOverloads constructor(
         canvas.save()
         var lineWidth: Int = 40
 
-        for (i in 0..60) {
+        for (i in 0 until 60) {
             if (i % 5 == 0) {
                 mPaint!!.setStrokeWidth(Utils.dp2px(2))
                 mPaint!!.setColor(mColorLong);
@@ -142,16 +142,17 @@ class WatchBoard @JvmOverloads constructor(
                 mPaint!!.setTextSize(mTextSize);
                 val text = (if (i / 5 === 0) 12 else i / 5).toString() + ""
                 var textBound = Rect()
-                mPaint!!.setColor(Color.BLACK);
+                mPaint!!.setColor(Color.BLACK)
                 mPaint!!.getTextBounds(text, 0, text.length, textBound)
                 val textHeight: Int = textBound.bottom - textBound.top
+                val textWidth: Int = (textBound.right-textBound.left)
                 canvas.save()
                 //这个时候我们使用Canvas的Save方法保存了刚才的状态，这个时候我们不移动X轴，只移动Y轴，将坐标向上移动-mRidus + textHeight距离，因为对于手机来说，向上为Y的负轴，所以为-mRidus + textHeight，下面我一会用图来说明
-                canvas.translate(0f, -mRadius + textHeight + lineWidth + mPadding / 2)
+                canvas.translate(-(textWidth/4).toFloat()+4, -mRadius + (textHeight+textWidth)/2 + lineWidth + mPadding / 2)
                 //由于我们没旋转一次，会使用Canvas的rotate方法顺时针旋转6度，所以文字也会跟着旋转，但是我们要让文字不旋转的话，就需要逆时针旋转相应的度数
-                canvas.rotate(-(6 * i).toFloat())
+                canvas.rotate(-(6F * i))
                 canvas.drawText(text,
-                        (mWidth - mPadding) / 2.toFloat()-Utils.dp2px(2),
+                        (mWidth - mPadding) / 2.toFloat(),
                         (mWidth + mPadding) / 2.toFloat(), mPaint!!)
                 canvas.restore()
             }
@@ -165,23 +166,22 @@ class WatchBoard @JvmOverloads constructor(
     //绘制表盘
     fun drawScale(canvas: Canvas) {
         canvas.save()
-        mPaint?.setStrokeWidth(Utils.dp2px(1));
+        mPaint?.setStrokeWidth(Utils.dp2px(1))
         var lineWidth: Int
 
-        for (i in 0..60) {
+        for (i in 0 until  60) {
             if (i % 5 == 0) {
-                lineWidth = 40;
+                lineWidth = 40
                 mPaint!!.setStrokeWidth(Utils.dp2px(2))
-                mPaint!!.setColor(mColorLong);
+                mPaint!!.setColor(mColorLong)
 
             } else {
-                lineWidth = 30;
-                mPaint!!.setColor(mColorShort);
+                lineWidth = 30
+                mPaint!!.setColor(mColorShort)
                 mPaint!!.setStrokeWidth(Utils.dp2px(1))
             }
-//            canvas.save()
             canvas.drawLine((mWidth!! / 2).toFloat(), mPadding, (mWidth!! / 2).toFloat(), mPadding + lineWidth, mPaint!!);
-            canvas.rotate(6F, (mWidth!! / 2).toFloat(), (mWidth!! / 2).toFloat());
+            canvas.rotate(6F, (mWidth!! / 2).toFloat(), (mWidth!! / 2).toFloat())
         }
         canvas.restore()
 

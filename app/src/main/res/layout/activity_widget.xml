@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.WidgetActivity">
 
-<!--    <com.wmy.kotlin.demo.widget.WatchBoard-->
-<!--        android:id="@+id/watchBoard"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:background="@color/colorPrimary"-->
-<!--        app:wb_scale_short_color="@color/colorAccent"-->
-<!--        tools:ignore="MissingConstraints" />-->
+    <com.wmy.kotlin.demo.widget.WatchBoard
+        android:id="@+id/watchBoard"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary"
+        app:wb_scale_short_color="@color/colorAccent"
+        tools:ignore="MissingConstraints" />
 
 
 <!--    <com.wmy.kotlin.demo.widget.CompassView-->
@@ -24,10 +24,10 @@
 <!--        app:wb_scale_short_color="@color/colorAccent"-->
 <!--        tools:ignore="MissingConstraints"-->
 <!--        tools:layout_editor_absoluteX="0dp" />-->
-    <com.wmy.kotlin.demo.widget.BezierView
-        android:id="@+id/bezierView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimary"
-        tools:ignore="MissingConstraints" />
+<!--    <com.wmy.kotlin.demo.widget.BezierView-->
+<!--        android:id="@+id/bezierView"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        tools:ignore="MissingConstraints" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
