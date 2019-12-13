@@ -37,14 +37,11 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        if (layoutId() > 0) {
-//
-//        }
         mPresenter = initPresenter()
+        //逻辑处理 判断是否使用公共的toolbar，如果使用 则应用母版逻辑，如果不使用，则页面自行处理，基类不做干预
         if (isShowActionBar()) {
             setContentView(R.layout.activity_common)
             addSubView(layoutId())
-
             srl_refresh = findViewById(R.id.srl_refresh)
             toolbar = findViewById(R.id.toolbar)
             srl_refresh!!.setEnableLoadMore(false)
@@ -60,14 +57,16 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
     }
 
 
-
+    /**
+     * 初始化标题栏
+     */
     protected open fun initActionBar() {
         if (toolbar != null) {
             toolbar!!.setTitle(getTitle())
 
             setSupportActionBar(toolbar)
 
-            toolbar?.setNavigationOnClickListener(object : OnClickListener{
+            toolbar?.setNavigationOnClickListener(object : OnClickListener {
                 override fun onClick(p0: View?) {
                     onBackPressed()
                 }
@@ -91,15 +90,13 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
 //        toolbar?.setTitle(title)
     }
 
+    /**
+     * 设置title
+     */
     open fun setTitle(title: String) {
         toolbar!!.setTitle(title)
     }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() === R.id.home) {
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
     /**
      * 是否使用ActionBar
      */
@@ -149,20 +146,26 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
         imm.hideSoftInputFromWindow(mEditText.windowToken, 0)
     }
 
+    /**
+     * 根据layoutid 添加内容布局
+     */
     fun addSubView(resId: Int) {
         if (resId <= 0) return
-//          center_common = findViewById(R.id.center_common)
         loadChildLayout(center_common as ViewGroup, resId)
     }
 
+
+    /**
+     * 加载子类布局
+     */
     fun loadChildLayout(view: ViewGroup, childResId: Int) {
         val laInflater = LayoutInflater.from(view.context)
         if (LinearLayout::class.java.isAssignableFrom(view.javaClass)) {
-            val layout = LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT)
+            val layout = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
             view.addView(laInflater.inflate(childResId, null), layout)
         }
         if (RelativeLayout::class.java.isAssignableFrom(view.javaClass)) {
-            val layout = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT)
+            val layout = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
             view.addView(laInflater.inflate(childResId, null), layout)
         }
 //        if (AbsoluteLayout::class.java.isAssignableFrom(view.javaClass)) {
@@ -170,7 +173,7 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
 //            view.addView(laInflater.inflate(childResId, null), layout)
 //        }
         if (FrameLayout::class.java.isAssignableFrom(view.javaClass)) {
-            val layout = FrameLayout.LayoutParams(FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT)
+            val layout = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
             view.addView(laInflater.inflate(childResId, null), layout)
         }
     }

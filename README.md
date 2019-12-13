@@ -1,6 +1,18 @@
 # KotlinMvpDemo
 在自我学习的过程中搭建的一个mvp 模式的demo
 
+修改基础类的处理逻辑，使用母版的形式，进行公共布局处理
+
+    //逻辑处理 判断是否使用公共的toolbar，如果使用 则应用母版逻辑，如果不使用，则页面自行处理，基类不做干预
+        if (isShowActionBar()) {
+            setContentView(R.layout.activity_common)
+            addSubView(layoutId())
+            // TODO  可处理一些不同加载逻辑
+          //  initActionBar()
+
+        } else {
+            setContentView(layoutId())
+        }
 重新封装了retrofit+okhttp +rxjava 使用泛型处理统一的json 解析
 根据回调接口的泛型类型进行返回处理， EasyRetrofit 处理头信息和response 的消息拦截进行统一的返回
 
