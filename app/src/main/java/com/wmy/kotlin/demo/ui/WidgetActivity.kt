@@ -13,31 +13,28 @@ import com.wmy.kotlin.mvp.lib.mvp.contract.BaseContract.Presenter
 import kotlinx.android.synthetic.main.activity_widget.*
 
 class WidgetActivity : BaseActivity<Presenter<Any>, Any>() {
-    override fun initPresenter(): Presenter<Any>? {
+     override fun initPresenter(): Presenter<Any>? {
         return null
     }
-    var sensorManager: SensorManager? =null
-    var listener: SensorEventListener? =null
+
+    var sensorManager: SensorManager? = null
+    var listener: SensorEventListener? = null
     override fun init() {
-
-
-// 取传感器
-         sensorManager =
-                getSystemService(SENSOR_SERVICE) as SensorManager;
+        // 取传感器
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager;
         // 获取陀螺仪
-        val  gyroscopeSensor =
-                sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
+        val gyroscopeSensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ORIENTATION)
 
-        listener=object :SensorEventListener{
+        listener = object : SensorEventListener {
             override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
 
             }
 
             override fun onSensorChanged(p0: SensorEvent?) {
-                var values= p0!!.values
+                var values = p0!!.values
 
-                var value0=values[0]
-                var value1=values[1]
+                var value0 = values[0]
+                var value1 = values[1]
 //                LogUtils.e("打印数据：$value0  $value1")
 //                compassView.setValues(values)
             }
@@ -50,7 +47,7 @@ class WidgetActivity : BaseActivity<Presenter<Any>, Any>() {
 
     }
 
-    override fun layoutId(): Int =R.layout.activity_widget
+    override fun layoutId(): Int = R.layout.activity_widget
 
     override fun initData() {
     }

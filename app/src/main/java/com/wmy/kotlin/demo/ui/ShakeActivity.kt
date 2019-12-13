@@ -13,7 +13,6 @@ import com.wmy.kotlin.demo.R
 import com.wmy.kotlin.demo.utils.LogUtils
 import com.wmy.kotlin.mvp.lib.base.BaseActivity
 import com.wmy.kotlin.mvp.lib.mvp.contract.BaseContract
-import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.activity_shake.*
 import kotlinx.android.synthetic.main.content_shake.button
 import kotlinx.android.synthetic.main.content_shake.textView2
@@ -57,8 +56,7 @@ class ShakeActivity : BaseActivity<BaseContract.Presenter<Any>, Any>(), SensorEv
     }
     //初始化数据
     override fun initData() {
-        toolbar.setTitle("抽奖")
-        setSupportActionBar(toolbar)
+//        setSupportActionBar(toolbar)
         list = ArrayList()
         list.add("胡雅楠")
         list.add("王明雨")

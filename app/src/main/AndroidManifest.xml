@@ -7,20 +7,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--应用使用设备的近程传感器。例如，电话应用可以在其检测到用户握持的设备贴近身体时关闭设备的屏幕。-->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 应用使用设备的近程传感器。例如，电话应用可以在其检测到用户握持的设备贴近身体时关闭设备的屏幕。 -->
     <uses-feature
         android:name="android.hardware.sensor.proximity"
-        android:required="true" />
-    <!--    应用使用设备的陀螺仪来检测旋转和倾斜，从而形成一个六轴方向系统。 通过使用该传感器，应用可以更顺利地检测其是否需要在纵向与横向方向之间切换。-->
+        android:required="true" /> <!-- 应用使用设备的陀螺仪来检测旋转和倾斜，从而形成一个六轴方向系统。 通过使用该传感器，应用可以更顺利地检测其是否需要在纵向与横向方向之间切换。 -->
     <uses-feature
         android:name="android.hardware.sensor.gyroscope"
-        android:required="true" />
-    <!--   手机振动-->
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <!--重力加速度传感器权限 -->
-    <uses-permission android:name="android.hardware.sensor.accelerometer"/>
+        android:required="true" /> <!-- 手机振动 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 重力加速度传感器权限 -->
+    <uses-permission android:name="android.hardware.sensor.accelerometer" />
 
     <application
         android:name=".MyAppLication"
@@ -31,20 +26,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.WebViewActivity" />
+        <activity
             android:name=".ui.ShakeActivity"
             android:label="@string/title_activity_shake"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity android:name=".ui.WidgetActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.WidgetActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/TranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
     </application>
 

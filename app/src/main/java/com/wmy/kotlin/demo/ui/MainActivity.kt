@@ -9,8 +9,11 @@ import android.location.Location
 import android.os.Environment
 import android.os.Handler
 import android.os.Message
+import android.view.MenuItem
 import android.view.View
 import android.view.View.OnClickListener
+import com.google.android.material.navigation.NavigationView
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
@@ -23,10 +26,7 @@ import com.wmy.kotlin.demo.utils.NetworkUtils
 import com.wmy.kotlin.mvp.lib.base.BaseActivity
 import com.wmy.kotlin.mvvm.theme.SkinManager
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
-import java.sql.Time
-import java.util.*
-import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.activity_main2.*
 
 
 class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, HomeContract.View>(), HomeContract.View {
@@ -56,20 +56,24 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
                     }
                 })
         mPresenter!!.attachView(this as HomeContract.View)
+        nav_view.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(p0: MenuItem): Boolean {
+                if (p0.itemId == R.id.nav_home) startActivity1(WebViewActivity::class.java)
+                return true
+            }
 
-//        for (i in 0..100) {
-//            list.add("wang${i}")
-//        }
+        })
     }
 
 
-    override fun layoutId(): Int = R.layout.activity_main
+    override fun layoutId(): Int = R.layout.activity_main2
+    override fun isShowActionBar(): Boolean = false
 
 
     override fun initData() {
 //        setTitle("首页")
-        toolbar.title = "首页"
-        setSupportActionBar(toolbar)
+//        toolbar.title = "首页"
+//        setSupportActionBar(toolbar)
         setData(null)
     }
 
@@ -90,7 +94,8 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
 ////            override fun onClick(p0: View?) {
 ////                get()
 //        })
-        srl_refresh.setEnableLoadMore(false)
+
+
         layout1.setOnClickListener(object : OnClickListener {
             override fun onClick(p0: View?) {
 //                get()
@@ -116,7 +121,6 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
     override fun start() {
 //        mPresenter.start()
     }
-
 
 
     /**
