@@ -3,14 +3,17 @@ package com.wmy.kotlin.demo.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.widget.RemoteViews
 import com.wmy.kotlin.demo.R
+
 
 /**
  * Implementation of App Widget functionality.
  */
 class WatchWidget : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+        super.onEnabled(context)
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId)
@@ -18,6 +21,10 @@ class WatchWidget : AppWidgetProvider() {
     }
 
     override fun onEnabled(context: Context) {
+        super.onEnabled(context)
+        // 启动Service
+        // 启动Service
+//        context.startService(Intent(context, ClockService::class.java))
         // Enter relevant functionality for when the first widget is created
     }
 
@@ -30,7 +37,7 @@ internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManage
     val widgetText = context.getString(R.string.appwidget_text)
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.watch_widget)
-    views.setTextViewText(R.id.appwidget_text, widgetText)
+//    views.setTextViewText(R.id.watchBoard, widgetText)
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)

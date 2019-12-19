@@ -6,6 +6,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.TextView
 import com.wmy.kotlin.demo.R
 import com.wmy.kotlin.demo.utils.LogUtils
 import com.wmy.kotlin.demo.utils.Utils
@@ -18,7 +19,7 @@ import java.util.*
  */
 class WatchBoard @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
+) : TextView(context, attrs, defStyleAttr) {
     var mRadius: Float = 0.0f // 圆形半径
     var mPadding: Float = 0.0f  // 边距
     var mTextSize: Float = 0.0f  // 文字大小

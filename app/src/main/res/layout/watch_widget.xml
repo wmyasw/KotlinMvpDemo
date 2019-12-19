@@ -1,10 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#09C"
     android:padding="@dimen/widget_margin">
 
-    <TextView
+<!--    <com.wmy.kotlin.demo.widget.WatchBoard-->
+<!--        android:id="@+id/watchBoard"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        app:wb_scale_short_color="@color/colorAccent"-->
+<!--        tools:ignore="MissingConstraints" />-->
+        <TextView
         android:id="@+id/appwidget_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -25,10 +25,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".widget.WatchWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/watch_widget_info" />
+        </receiver>
+
+        <activity android:name=".ui.SettingActivity" />
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.WebViewActivity" />
         <activity
             android:name=".ui.ShakeActivity"

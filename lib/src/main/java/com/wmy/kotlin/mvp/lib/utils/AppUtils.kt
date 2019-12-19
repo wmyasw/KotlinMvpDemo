@@ -42,6 +42,11 @@ class AppUtils private constructor() {
             return verCode
         }
 
+        fun getPackageName(context: Context):String{
+            val packageManager =context.packageName
+            return packageManager
+
+        }
 
         /**
          * 获取应用运行的最大内存
@@ -155,6 +160,21 @@ class AppUtils private constructor() {
          */
         val sdkVersion: Int
             get() = android.os.Build.VERSION.SDK_INT
+
+        /**
+         * 获取手机系统版本
+         *
+         * @return 如 8.1.0
+         */
+        val systemVersion: String?
+            get() = android.os.Build.VERSION.RELEASE
+        /**
+         * 获取手机系统版本
+         *
+         * @return 如 8.1.0
+         */
+        val minVersion: Int
+            get() = android.os.Build.VERSION.PREVIEW_SDK_INT
     }
 
 

@@ -17,7 +17,13 @@
     <string name="menu_home">webview</string>
     <string name="menu_gallery">建设中..</string>
     <string name="menu_slideshow">建设中..</string>
-    <string name="menu_tools">建设中..</string>
+    <string name="menu_tools">系统信息</string>
     <string name="menu_share">建设中..</string>
     <string name="menu_send">建设中..</string>
+    <string name="t_appInfo_label">App信息</string>
+    <string name="s_system_version_label">系统版本</string>
+    <string name="s_phone_kit_label">手机型号</string>
+    <string name="s_phone_info">手机信息</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

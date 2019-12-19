@@ -59,6 +59,7 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
         nav_view.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
                 if (p0.itemId == R.id.nav_home) startActivity1(WebViewActivity::class.java)
+                if (p0.itemId == R.id.nav_tools) startActivity1(SettingActivity::class.java)
                 return true
             }
 
