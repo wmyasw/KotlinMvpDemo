@@ -61,3 +61,7 @@ class MyAppLication : BaseApplication() {
 
 
    SkinManager.instance.reDefaultTheme()
+   
+  编写的一个自定义的悬浮框,参考微信的悬浮效果
+  里面的item 添加暂未写
+   https://github.com/wmyasw/KotlinMvpDemo/blob/master/floatwidget/Record_2019-12-31-14-46-54_8a1996bda865bd2d603615e0d14c159d-150925.gif
