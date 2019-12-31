@@ -1,2 +1,2 @@
-include ':app', ':lib', ':theme_lib', ':theme_w'
+include ':app', ':lib', ':theme_lib', ':theme_w', ':floatwidget'
 rootProject.name='KotlinDemo'

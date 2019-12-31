@@ -89,14 +89,14 @@ class SkinManager private constructor() : ISkinLoader {
 
         trueColor = try {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                mResources!!.getColor(trueResId, mResources!!.newTheme())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M&&mResources!=null) {
+                mResources!!.getColor(trueResId, null)
             } else
                 mResources!!.getColor(trueResId)
 
         } catch (e: NotFoundException) {
             e.printStackTrace()
-            originColor
+           return originColor
         }
 
 
@@ -204,13 +204,7 @@ class SkinManager private constructor() : ISkinLoader {
     fun reDefaultTheme() { //重置默认皮肤地址
         SkinConfig.saveSkinPath(context, SkinConfig.DEFALT_SKIN)
         isDefaultSkin = true
-//        if( SkinFactory.instance!=null){
-//            mResources = SkinFactory.context!!.resources
-//        }
         mResources = null
-        // 用于访问内置资源
-
-//        mResources = context!!.resources
         notifySkinUpdate()
     }
 

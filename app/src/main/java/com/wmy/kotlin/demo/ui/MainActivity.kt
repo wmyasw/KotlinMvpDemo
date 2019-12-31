@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.location.Location
+import android.os.Build
 import android.os.Environment
 import android.os.Handler
 import android.os.Message
@@ -24,6 +25,7 @@ import com.wmy.kotlin.demo.mvp.HomeContract
 import com.wmy.kotlin.demo.mvp.MainPresenter
 import com.wmy.kotlin.demo.utils.NetworkUtils
 import com.wmy.kotlin.mvp.lib.base.BaseActivity
+import com.wmy.kotlin.mvvm.floatwidget.FloatManager
 import com.wmy.kotlin.mvvm.theme.SkinManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -60,10 +62,13 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
             override fun onNavigationItemSelected(p0: MenuItem): Boolean {
                 if (p0.itemId == R.id.nav_home) startActivity1(WebViewActivity::class.java)
                 if (p0.itemId == R.id.nav_tools) startActivity1(SettingActivity::class.java)
+                if (p0.itemId == R.id.nav_slideshow) startActivity1(BluetoothActivity::class.java)
                 return true
             }
 
         })
+
+
     }
 
 
@@ -76,6 +81,10 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
 //        toolbar.title = "首页"
 //        setSupportActionBar(toolbar)
         setData(null)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            FloatManager.instance!!.showWindow(this)
+        }
+//        FloatManager.instance!!.setViewMove(true)
     }
 
 
