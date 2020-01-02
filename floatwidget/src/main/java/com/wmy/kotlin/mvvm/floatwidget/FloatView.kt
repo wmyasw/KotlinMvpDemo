@@ -27,9 +27,12 @@ class FloatView : View {
     private var mDisplayMetrics: DisplayMetrics? = null
     //窗口管理
     private var mWindowManager: WindowManager? = null
+    //右边停靠位置
     val RIGHT_POSTION = 1
+    //左边停靠位置
     val LEFT_POSTION = 2
-
+    //记录当前悬浮位置 目前只支持左右位置
+    var DOCKING_POSITION = RIGHT_POSTION
     //起始点
     var startX = 0
     var startY = 0
@@ -41,11 +44,8 @@ class FloatView : View {
     var widthPixels = 0
     private var offsetX = 0f
     private var offsetY = 0f
-    //记录当前悬浮位置 目前只支持左右位置
-    var DOCKING_POSITION = RIGHT_POSTION
-//    private var start: PointF? = null
-//    private var end: PointF? = null
-//    private var control: PointF? = null
+
+
 
     var centerx = 0F
     var centery = 0F
@@ -55,7 +55,7 @@ class FloatView : View {
     var paint: Paint? = null
     //圆柱需要的画笔
     var paintYz: Paint? = null
-    var  paintB:Paint?=null
+    var paintB: Paint? = null
     var list: MutableList<String>? = null
 
     init {
@@ -64,7 +64,7 @@ class FloatView : View {
 //        control = PointF(0f, 0f)
 
         list = ArrayList()
-          paintB = Paint()
+        paintB = Paint()
         paintB!!.setColor(Color.GRAY)
         paintB!!.setStrokeWidth(1F)
         paintB!!.setAntiAlias(true)
@@ -73,7 +73,7 @@ class FloatView : View {
 
 
         paintYz = Paint()
-        paintYz!!.setColor(Color.rgb(202,202,202))
+        paintYz!!.setColor(Color.rgb(202, 202, 202))
         paintYz!!.setStrokeWidth(8F)
         paintYz!!.setStyle(Paint.Style.FILL)
         paintYz!!.alpha = 200
@@ -158,7 +158,7 @@ class FloatView : View {
                 mLayoutParams!!.x = (event.rawX - this!!.width / 2).toInt()
                 mLayoutParams!!.y = (event.rawY - this!!.height).toInt()
                 val curTime = System.currentTimeMillis()
-               var isLongClick= isLongPressed(startX,startY,event.rawX,event.rawY,startTime,curTime,300)
+                var isLongClick = isLongPressed(startX, startY, event.rawX, event.rawY, startTime, curTime, 300)
                 if (isLongClick && (mLayoutParams!!.x - 20 < 0 || mLayoutParams!!.x > widthPixels - width - 20)) {
                     performLongClick()
                     return false
@@ -293,9 +293,9 @@ class FloatView : View {
     @SuppressLint("NewApi")
     fun drawCircle(canvas: Canvas?) {
 
-        if(isMoveing){
-          var  paintYz = Paint()
-            paintYz!!.setColor(Color.rgb(202,202,202))
+        if (isMoveing) {
+            var paintYz = Paint()
+            paintYz!!.setColor(Color.rgb(202, 202, 202))
             paintYz!!.setStrokeWidth(8F)
             paintYz!!.setStyle(Paint.Style.FILL)
             paintYz!!.alpha = 200
@@ -317,8 +317,8 @@ class FloatView : View {
             paint!!.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR))
             paint!!.setColor(Color.BLUE)
             canvas.drawCircle(centerx + 20, centery, 50F / 5 * 3, paint!!)
-        }else
-          canvas.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), 50F, paint!!)
+        } else
+            canvas.drawCircle((width / 2).toFloat(), (height / 2).toFloat(), 50F, paint!!)
     }
 
 
@@ -328,13 +328,6 @@ class FloatView : View {
         centery = h / 2.toFloat()
         wx = 20f
         wy = 20f
-//        // 初始化数据点和控制点的位置
-//        start!!.x = centerx
-//        start!!.y = (centery + 120 / 2)
-//        end!!.x = centerx
-//        end?.y = centery - 120 / 2
-//        control!!.x = centerx - 120
-//        control!!.y = centery
 
     }
 
@@ -346,7 +339,7 @@ class FloatView : View {
         Log.e("FloatManager", "leftCylinder RectF  $wx    +  $wy")
         val oval = RectF(wx, wy,
                 (width - wx), (height - wy))
-        val jx = RectF(0f, wy-1,
+        val jx = RectF(0f, wy - 1,
                 (width / 2).toFloat(), (height - wy))
 
         if (!isMoveing) {
@@ -366,7 +359,7 @@ class FloatView : View {
         Log.e("FloatManager", "rightCylinder RectF  $wx    +  $wy")
         val oval = RectF(wx, wy,
                 ((width - wx).toFloat()), (height - wy))
-        val jx = RectF((width / 2).toFloat(), wy-1,
+        val jx = RectF((width / 2).toFloat(), wy - 1,
                 ((width).toFloat()), (height - wy))
 
         if (!isMoveing) {
@@ -378,214 +371,6 @@ class FloatView : View {
         }
     }
 
-    fun doBlur(sentBitmap: Bitmap, radius: Int, canReuseInBitmap: Boolean): Bitmap? {
-        val bitmap: Bitmap
-        bitmap = if (canReuseInBitmap) {
-            sentBitmap
-        } else {
-            sentBitmap.copy(sentBitmap.config, true)
-        }
-        if (radius < 1) {
-            return null
-        }
-        val w = bitmap.width
-        val h = bitmap.height
-        val pix = IntArray(w * h)
-        bitmap.getPixels(pix, 0, w, 0, 0, w, h)
-        val wm = w - 1
-        val hm = h - 1
-        val wh = w * h
-        val div = radius + radius + 1
-        val r = IntArray(wh)
-        val g = IntArray(wh)
-        val b = IntArray(wh)
-        var rsum: Int
-        var gsum: Int
-        var bsum: Int
-        var x: Int
-        var y: Int
-        var i: Int
-        var p: Int
-        var yp: Int
-        var yi: Int
-        var yw: Int
-        val vmin = IntArray(Math.max(w, h))
-        var divsum = div + 1 shr 1
-        divsum *= divsum
-        val dv = IntArray(256 * divsum)
-        i = 0
-        while (i < 256 * divsum) {
-            dv[i] = i / divsum
-            i++
-        }
-        yi = 0
-        yw = yi
-        val stack = Array(div) { IntArray(3) }
-        var stackpointer: Int
-        var stackstart: Int
-        var sir: IntArray
-        var rbs: Int
-        val r1 = radius + 1
-        var routsum: Int
-        var goutsum: Int
-        var boutsum: Int
-        var rinsum: Int
-        var ginsum: Int
-        var binsum: Int
-        y = 0
-        while (y < h) {
-            bsum = 0
-            gsum = bsum
-            rsum = gsum
-            boutsum = rsum
-            goutsum = boutsum
-            routsum = goutsum
-            binsum = routsum
-            ginsum = binsum
-            rinsum = ginsum
-            i = -radius
-            while (i <= radius) {
-                p = pix[yi + Math.min(wm, Math.max(i, 0))]
-                sir = stack[i + radius]
-                sir[0] = p and 0xff0000 shr 16
-                sir[1] = p and 0x00ff00 shr 8
-                sir[2] = p and 0x0000ff
-                rbs = r1 - Math.abs(i)
-                rsum += sir[0] * rbs
-                gsum += sir[1] * rbs
-                bsum += sir[2] * rbs
-                if (i > 0) {
-                    rinsum += sir[0]
-                    ginsum += sir[1]
-                    binsum += sir[2]
-                } else {
-                    routsum += sir[0]
-                    goutsum += sir[1]
-                    boutsum += sir[2]
-                }
-                i++
-            }
-            stackpointer = radius
-            x = 0
-            while (x < w) {
-                r[yi] = dv[rsum]
-                g[yi] = dv[gsum]
-                b[yi] = dv[bsum]
-                rsum -= routsum
-                gsum -= goutsum
-                bsum -= boutsum
-                stackstart = stackpointer - radius + div
-                sir = stack[stackstart % div]
-                routsum -= sir[0]
-                goutsum -= sir[1]
-                boutsum -= sir[2]
-                if (y == 0) {
-                    vmin[x] = Math.min(x + radius + 1, wm)
-                }
-                p = pix[yw + vmin[x]]
-                sir[0] = p and 0xff0000 shr 16
-                sir[1] = p and 0x00ff00 shr 8
-                sir[2] = p and 0x0000ff
-                rinsum += sir[0]
-                ginsum += sir[1]
-                binsum += sir[2]
-                rsum += rinsum
-                gsum += ginsum
-                bsum += binsum
-                stackpointer = (stackpointer + 1) % div
-                sir = stack[stackpointer % div]
-                routsum += sir[0]
-                goutsum += sir[1]
-                boutsum += sir[2]
-                rinsum -= sir[0]
-                ginsum -= sir[1]
-                binsum -= sir[2]
-                yi++
-                x++
-            }
-            yw += w
-            y++
-        }
-        x = 0
-        while (x < w) {
-            bsum = 0
-            gsum = bsum
-            rsum = gsum
-            boutsum = rsum
-            goutsum = boutsum
-            routsum = goutsum
-            binsum = routsum
-            ginsum = binsum
-            rinsum = ginsum
-            yp = -radius * w
-            i = -radius
-            while (i <= radius) {
-                yi = Math.max(0, yp) + x
-                sir = stack[i + radius]
-                sir[0] = r[yi]
-                sir[1] = g[yi]
-                sir[2] = b[yi]
-                rbs = r1 - Math.abs(i)
-                rsum += r[yi] * rbs
-                gsum += g[yi] * rbs
-                bsum += b[yi] * rbs
-                if (i > 0) {
-                    rinsum += sir[0]
-                    ginsum += sir[1]
-                    binsum += sir[2]
-                } else {
-                    routsum += sir[0]
-                    goutsum += sir[1]
-                    boutsum += sir[2]
-                }
-                if (i < hm) {
-                    yp += w
-                }
-                i++
-            }
-            yi = x
-            stackpointer = radius
-            y = 0
-            while (y < h) {
-                // Preserve alpha channel: ( 0xff000000 & pix[yi] )
-                pix[yi] = -0x1000000 and pix[yi] or (dv[rsum] shl 16) or (dv[gsum] shl 8) or dv[bsum]
-                rsum -= routsum
-                gsum -= goutsum
-                bsum -= boutsum
-                stackstart = stackpointer - radius + div
-                sir = stack[stackstart % div]
-                routsum -= sir[0]
-                goutsum -= sir[1]
-                boutsum -= sir[2]
-                if (x == 0) {
-                    vmin[y] = Math.min(y + r1, hm) * w
-                }
-                p = x + vmin[y]
-                sir[0] = r[p]
-                sir[1] = g[p]
-                sir[2] = b[p]
-                rinsum += sir[0]
-                ginsum += sir[1]
-                binsum += sir[2]
-                rsum += rinsum
-                gsum += ginsum
-                bsum += binsum
-                stackpointer = (stackpointer + 1) % div
-                sir = stack[stackpointer]
-                routsum += sir[0]
-                goutsum += sir[1]
-                boutsum += sir[2]
-                rinsum -= sir[0]
-                ginsum -= sir[1]
-                binsum -= sir[2]
-                yi += w
-                y++
-            }
-            x++
-        }
-        bitmap.setPixels(pix, 0, w, 0, 0, w, h)
-        return bitmap
-    }
 
 
 }
