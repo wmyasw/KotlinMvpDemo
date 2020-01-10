@@ -32,12 +32,14 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srlEnableFooterFollowWhenNoMoreData="false">
 
-        <RelativeLayout
+        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
             android:id="@+id/center_common"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/appBarLayout"
             android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:visibility="visible"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

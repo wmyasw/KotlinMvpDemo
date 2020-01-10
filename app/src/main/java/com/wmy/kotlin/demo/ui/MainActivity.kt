@@ -63,6 +63,8 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
                 if (p0.itemId == R.id.nav_home) startActivity1(WebViewActivity::class.java)
                 if (p0.itemId == R.id.nav_tools) startActivity1(SettingActivity::class.java)
                 if (p0.itemId == R.id.nav_slideshow) startActivity1(BluetoothActivity::class.java)
+                if (p0.itemId == R.id.nav_gallery) startActivity1(ZYActivity::class.java)
+                if (p0.itemId == R.id.nav_send) startActivity1(RecycleActivity::class.java)
                 return true
             }
 
@@ -76,13 +78,13 @@ class MainActivity : BaseActivity<HomeContract.Presenter<HomeContract.View>, Hom
     override fun isShowActionBar(): Boolean = false
 
 
-    override fun initData() {
+     fun initData() {
 //        setTitle("首页")
 //        toolbar.title = "首页"
 //        setSupportActionBar(toolbar)
         setData(null)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            FloatManager.instance!!.showWindow(this)
+//            FloatManager.instance!!.showWindow(this)
         }
 //        FloatManager.instance!!.setViewMove(true)
     }

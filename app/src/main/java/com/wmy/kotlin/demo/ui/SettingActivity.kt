@@ -54,9 +54,6 @@ class SettingActivity : BaseActivity<BaseContract.Presenter<Any>, Any>() {
 
     override fun layoutId(): Int = R.layout.activity_setting
 
-    override fun initData() {
-
-    }
 
     override fun start() {
 

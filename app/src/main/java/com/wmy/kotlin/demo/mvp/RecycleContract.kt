@@ -5,14 +5,14 @@ import com.wmy.kotlin.demo.module.WeatherBean
 import com.wmy.kotlin.mvp.lib.mvp.IBasePresenter
 import com.wmy.kotlin.mvp.lib.mvp.contract.BaseContract
 
-interface HomeContract{
+interface RecycleContract{
 
     interface View : BaseContract.View {
 
         /**
          * 设置第一次请求的数据
          */
-        fun setHomeData( w: WeatherBean)
+        fun setHomeData( w: MutableList<String>)
 
         /**
          * 设置加载更多的数据
@@ -31,7 +31,7 @@ interface HomeContract{
         /**
          * 获取首页精选数据
          */
-        open fun requestHomeData(location: Location)
+        open fun requestHomeData()
 
     }
 

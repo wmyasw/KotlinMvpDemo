@@ -15,11 +15,11 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">webview</string>
-    <string name="menu_gallery">建设中..</string>
+    <string name="menu_gallery">周易</string>
     <string name="menu_slideshow">蓝牙..</string>
     <string name="menu_tools">系统信息</string>
     <string name="menu_share">建设中..</string>
-    <string name="menu_send">建设中..</string>
+    <string name="menu_send">Recycle</string>
     <string name="t_appInfo_label">App信息</string>
     <string name="s_system_version_label">系统版本</string>
     <string name="s_phone_kit_label">手机型号</string>

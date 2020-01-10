@@ -229,7 +229,7 @@ class WatchBoard @JvmOverloads constructor(
 
         // 绘制原点
         mPaint!!.setStyle(Paint.Style.FILL);
-        canvas.drawCircle((mWidth!! / 2).toFloat(), (mWidth!! / 2).toFloat(), mSecondPointWidth * 4, mPaint!!);
+        canvas.drawCircle((mWidth / 2).toFloat(), (mWidth/ 2).toFloat(), mSecondPointWidth * 4, mPaint!!);
     }
 
     fun measureSize(measureSpec: Int): Int {

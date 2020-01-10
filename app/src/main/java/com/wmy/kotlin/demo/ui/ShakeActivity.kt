@@ -54,9 +54,9 @@ class ShakeActivity : BaseActivity<BaseContract.Presenter<Any>, Any>(), SensorEv
     override fun layoutId(): Int {
         return R.layout.activity_shake
     }
-    //初始化数据
-    override fun initData() {
-//        setSupportActionBar(toolbar)
+
+    override fun start() {
+        setSupportActionBar(toolbar)
         list = ArrayList()
         list.add("胡雅楠")
         list.add("王明雨")
@@ -69,9 +69,6 @@ class ShakeActivity : BaseActivity<BaseContract.Presenter<Any>, Any>(), SensorEv
         list.add("郑卿吾")
         list.add("小萌老师")
         list.add("闫宇")
-    }
-
-    override fun start() {
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {

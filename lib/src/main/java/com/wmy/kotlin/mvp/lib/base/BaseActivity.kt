@@ -1,5 +1,6 @@
 package com.wmy.kotlin.mvp.lib.base
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.circularreveal.CircularRevealRelativeLayout
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.wmy.kotlin.mvp.lib.R
 import com.wmy.kotlin.mvp.lib.mvp.contract.BaseContract
@@ -35,6 +37,7 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
         startActivity(Intent(this, clazz))
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter = initPresenter()
@@ -51,7 +54,7 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
             setContentView(layoutId())
         }
         init()
-        initData()
+//        initData()
         start()
 
     }
@@ -119,10 +122,10 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
      */
     abstract fun layoutId(): Int
 
-    /**
-     * 初始化数据
-     */
-    abstract fun initData()
+//    /**
+//     * 初始化数据
+//     */
+//    abstract fun initData()
 
     /**
      * 开始加载
@@ -160,22 +163,24 @@ abstract class BaseActivity<P : BaseContract.Presenter<V>, V> : AppCompatActivit
      */
     fun loadChildLayout(view: ViewGroup, childResId: Int) {
         val laInflater = LayoutInflater.from(view.context)
-        if (LinearLayout::class.java.isAssignableFrom(view.javaClass)) {
-            val layout = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-            view.addView(laInflater.inflate(childResId, null), layout)
-        }
-        if (RelativeLayout::class.java.isAssignableFrom(view.javaClass)) {
-            val layout = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
-            view.addView(laInflater.inflate(childResId, null), layout)
-        }
-//        if (AbsoluteLayout::class.java.isAssignableFrom(view.javaClass)) {
-//            val layout = AbsoluteLayout.LayoutParams(AbsoluteLayout.LayoutParams.FILL_PARENT, AbsoluteLayout.LayoutParams.FILL_PARENT, 0, 0)
+        val layout = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        view.addView(laInflater.inflate(childResId, null), layout)
+//        if (LinearLayout::class.java.isAssignableFrom(view.javaClass)) {
+//            val layout = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
 //            view.addView(laInflater.inflate(childResId, null), layout)
 //        }
-        if (FrameLayout::class.java.isAssignableFrom(view.javaClass)) {
-            val layout = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-            view.addView(laInflater.inflate(childResId, null), layout)
-        }
+//        if (CircularRevealRelativeLayout::class.java.isAssignableFrom(view.javaClass)) {
+//            val layout = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+//            view.addView(laInflater.inflate(childResId, null), layout)
+//        }
+////        if (AbsoluteLayout::class.java.isAssignableFrom(view.javaClass)) {
+////            val layout = AbsoluteLayout.LayoutParams(AbsoluteLayout.LayoutParams.FILL_PARENT, AbsoluteLayout.LayoutParams.FILL_PARENT, 0, 0)
+////            view.addView(laInflater.inflate(childResId, null), layout)
+////        }
+//        if (FrameLayout::class.java.isAssignableFrom(view.javaClass)) {
+//            val layout = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
+//            view.addView(laInflater.inflate(childResId, null), layout)
+//        }
     }
 
 }

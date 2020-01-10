@@ -83,9 +83,6 @@ class WebViewActivity: BaseActivity<BaseContract.Presenter<Any>, Any>(){
       return  R.layout.activity_web_view
     }
 
-    override fun initData() {
-    }
-
     override fun start() {
     }
 

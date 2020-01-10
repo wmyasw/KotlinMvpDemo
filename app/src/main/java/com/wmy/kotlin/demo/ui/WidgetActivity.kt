@@ -49,9 +49,6 @@ class WidgetActivity : BaseActivity<Presenter<Any>, Any>() {
 
     override fun layoutId(): Int = R.layout.activity_widget
 
-    override fun initData() {
-    }
-
     override fun start() {
     }
 

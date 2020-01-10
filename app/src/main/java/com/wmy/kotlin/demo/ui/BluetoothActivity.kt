@@ -39,13 +39,13 @@ class BluetoothActivity : BaseActivity<BaseContract.Presenter<Any>, Any>() {
 
     override fun layoutId(): Int = R.layout.activity_bluetooth
 
-    override fun initData() {
-        button2.setOnClickListener { //如果当前在搜索，就先取消搜索
-            if (mBluetoothAdapter?.isDiscovering()!!) {
-                mBluetoothAdapter?.cancelDiscovery()
-            }
-            mBluetoothAdapter!!.startDiscovery()
-        }
+     fun initData() {
+         button2.setOnClickListener { //如果当前在搜索，就先取消搜索
+             if (mBluetoothAdapter?.isDiscovering()!!) {
+                 mBluetoothAdapter?.cancelDiscovery()
+             }
+             mBluetoothAdapter!!.startDiscovery()
+         }
     }
 
     override fun start() {
